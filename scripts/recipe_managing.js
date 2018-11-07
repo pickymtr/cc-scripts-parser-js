@@ -1,3 +1,21 @@
+function get_ingredients_list(recipe) {
+
+        const ConfigParser = require('configparser');
+        const config = new ConfigParser();
+
+        config.read('recipes.cfg');
+        var liste = []
+        var nb = 1
+        var ing = config.get('pizza', 'ingredient_'+ nb.toString());
+        while (ing) {
+                liste.push(ing);
+                nb += 1
+                ing = config.get('pizza', 'ingredient_'+ nb.toString());
+        }
+        return (liste)
+}
+
+
 function get_random_recipe() {
         const ConfigParser = require('configparser');
         const config = new ConfigParser();
@@ -16,5 +34,3 @@ function init_all_commands() {
         }
         return (liste_commands)
 }
-
-init_all_commands();
