@@ -1,6 +1,6 @@
-function get_ingredients_list(recipe) {
+const ConfigParser = require('configparser');
 
-        const ConfigParser = require('configparser');
+function get_ingredients_list(recipe) {
         const config = new ConfigParser();
 
         config.read('recipes.cfg');
@@ -15,14 +15,13 @@ function get_ingredients_list(recipe) {
         return (liste)
 }
 
-
 function get_random_recipe() {
-        const ConfigParser = require('configparser');
         const config = new ConfigParser();
 
         config.read('recipes.cfg');
         var x = Math.floor((Math.random() * config.sections().length) + 1);
 
+        console.log("coucou")
         return (config.sections()[x-1]);
 }
 
