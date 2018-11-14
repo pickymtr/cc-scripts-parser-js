@@ -1,9 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< HEAD
-
-=======
->>>>>>> 620b1df708ec96271ee8019b69adc423690d9eef
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -18,15 +14,8 @@
         crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-<<<<<<< HEAD
     <script src="config.js"></script>
     <title>Coding Club</title>
-=======
-
-    <title>Coding Club</title>
-    <script src="scripts/recipe_managing.js">
-    </script>
->>>>>>> 620b1df708ec96271ee8019b69adc423690d9eef
 </head>
 
 <body class="bg-secondary">
@@ -35,12 +24,14 @@
         <div class="col">
             <h2 class="text-center">Ingrédient(s)</h2>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Nom de l'ingrédient" aria-label="Nom de l'ingrédient"
-                    aria-describedby="button-addon2">
-                <div class="input-group-append">
-<<<<<<< HEAD
-                    <button class="btn btn-info btn-lg"  type="button" id="button-addon2">Ajouter</button>
-                </div>
+                <button onclick="add_ing('tomate')">Tomate</button>
+                <button onclick="add_ing('fromage')">Fromage</button>
+                <button onclick="add_ing('pâte')">Pâte</button>
+                <button onclick="add_ing('oeuf')">Oeuf</button>
+                <button onclick="add_ing('farine')">Farine</button>
+                <button onclick="add_ing('lait')">Lait</button>
+                <button onclick="add_ing('crème')">Crème</button>
+                <button onclick="add_ing('lardons')">Lardons</button>
             </div>
         </div>
         <div  class="col">
@@ -51,43 +42,57 @@
         </div>
         <div class="col">
             <h2 class="text-center">Commande(s)</h2>             
-            <button onclick="get_ingredients_list($('#commande1').text())" id="commande1"></button>
-            <button onclick="get_ingredients_list($('#commande2').text())" id="commande2"></button>
-            <button onclick="get_ingredients_list($('#commande3').text())" id="commande3"></button>
-            <button onclick="get_ingredients_list($('#commande4').text())" id="commande4"></button>
+            <button onclick="get_ingredients_list($('#commande1').text(), 1)" id="commande1"></button>
+            <button onclick="get_ingredients_list($('#commande2').text(), 2)" id="commande2"></button>
+            <button onclick="get_ingredients_list($('#commande3').text(), 3)" id="commande3"></button>
+            <button onclick="get_ingredients_list($('#commande4').text(), 4)" id="commande4"></button>
         </div>
     </div>
+    <button onclick="check_recipe($('recipe').text())">Envoie de la commande</button>
     <script>
+        var ing = []
+        var act_commande = 0
         var list = Object.keys(config.recipes)
         for(const i of Array(4).keys()) {
             var x = Math.floor((Math.random() * list.length) + 1);
             document.getElementById("commande"+ (i+1).toString()).innerHTML=list[x-1];
         }
-        function get_ingredients_list(recipe) {
+        function get_ingredients_list(recipe, nb_command) {
             var list=[]
             document.getElementById('recipe').innerHTML = recipe
             for (const i in config.recipes[recipe]) {
                 document.getElementById("ingredient"+ (Number(i)+1).toString()).innerHTML=config.recipes[recipe][i];
             }
+            act_commande = nb_command
+        }
+        function add_ing(name) {
+            ing.push(name);
+        }
+        function arraysEqual(a, b) {
+            if (a === b) return true;
+            if (a == null || b == null) return false;
+            if (a.length != b.length) return false;
+            for (var i = 0; i < a.length; ++i) {
+                if (a[i] !== b[i]) return false;
+            }
+            return true;
+        }
+        function check_recipe() {
+            var real = []
+            recipe = document.getElementById('recipe').innerHTML
+            for (const i in config.recipes[recipe]) {
+                real.push(config.recipes[recipe][i])
+            }
+            if (arraysEqual(ing, real)) {
+                alert('Good job !')
+                var el = document.getElementById("commande"+ act_commande.toString());
+                el.nextElementSibling.remove();
+            } else {
+                alert('Oops retry !')
+            }
+            ing = []
         }
     </script>
-=======
-                    <button class="btn btn-info btn-lg" onClick="get_random_recipe()" type="button" id="button-addon2">Ajouter</button>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <h2 class="text-center">Recette</h2>
-            <h3 class="text-center">Ingrédient(s)</h3>
-            <h3 class="text-center">Ingrédient(s)</h3>
-            <h3 class="text-center">Ingrédient(s)</h3>
-            <h3 class="text-center">Ingrédient(s)</h3>
-        </div>
-        <div class="col">
-            <h2 class="text-center">Commande(s)</h2>
-        </div>
-    </div>
->>>>>>> 620b1df708ec96271ee8019b69adc423690d9eef
 </body>
 
 </html>

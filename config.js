@@ -2,7 +2,7 @@ var config = {
         recipes: {
                 "pizza": [
                         "pâte",
-                        "Tomate",
+                        "tomate",
                         "fromage"
                 ],
                 "crêpe": [
